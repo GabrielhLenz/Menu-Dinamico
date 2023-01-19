@@ -1,0 +1,134 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>circular-menu</title>
+    <link rel="stylesheet" href="css/circular-menu.css">
+    <style>
+
+        .cn-menu1 {
+            position: center;
+            left: 50%;
+            top: 50%;
+        }
+
+        .cn-menu2 {
+            position: absolute;
+            left: 40%;
+            top: 50%;
+        }
+
+        .cn-menu3 {
+            position: absolute;
+            left: 60%;
+            top: 50%;
+        }
+
+        .cn-menu4 {
+            position: absolute;
+            left: 80%;
+            top: 50%;
+        }
+
+        .rect-icon {
+            background: #fff;
+            display: inline-block !important;
+        }
+
+        .circle-icon {
+            background: #f94321;
+            display: inline-block !important;
+            border-radius: 50%;
+        }
+
+        .my-icon{
+            background: url("./images/circular-menu.png");
+        }
+        .icon1 {
+            background-position: 0 0;
+        }
+        .icon2 {
+            background-position: 0 -56px;
+        }
+        .icon3 {
+            background-position: 0 -116px;
+        }
+
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            background: #52be7f;
+            color: #fff;
+        }
+
+    </style>
+</head>
+<body>
+<div id="circle-menu1" class="cn-menu1"></div>
+</body>
+</html>
+<script src="circular-menu.js"></script>
+<script>
+    var ele = document.querySelector('#circle-menu1');
+    var menu= [
+        { id: 1, nome: 'menu1' },
+        { id: 2, nome: 'menu2' },
+        { id: 3, nome: 'menu3' },
+        { id: 4, nome: 'menu4' },
+        { id: 5, nome: 'menu5' },
+        { id: 6, nome: 'menu6' },
+        { id: 7, nome: 'menu7' },
+        { id: 8, nome: 'menu8' },
+        { id: 9, nome: 'menu9' },
+    ]
+    var subMenu= [
+        { id: 1, nome: 'menu1', menu_id: 1 },
+        { id: 2, nome: 'menu1', menu_id: 1 },
+        { id: 3, nome: 'menu1', menu_id: 1 },
+        { id: 4, nome: 'menu1', menu_id: 2 },
+        { id: 5, nome: 'menu1', menu_id: 2 },
+        { id: 6, nome: 'menu1', menu_id: 3 },
+        { id: 7, nome: 'menu1', menu_id: 3 },
+        { id: 8, nome: 'menu1', menu_id: 3 },
+        { id: 9, nome: 'menu1', menu_id: 4 },
+        { id: 10, nome: 'menu10', menu_id: 5}
+    ]
+
+
+    let menuIndex = []
+
+    for (let i = 0; i < menu.length; i++) {
+        let currentMenu = menu[i]
+        let submenus = subMenu.filter(sub => sub.menu_id === currentMenu.id)
+        let submenusArray = submenus.map(sub => {return {title: sub.nome}})
+        menuIndex.push({title: currentMenu.nome, menus: submenusArray})
+    }
+    var cmenu = CMenu(ele)
+            .config({
+                        totalAngle: 360,//deg,
+                        spaceDeg: 1,//deg
+                        background: "#00FFFF",
+                        backgroundHover: "#123321",
+                        //pageBackground: "#52be7f",
+                        percent: 0.32,//%
+                        diameter: 300,//px
+                        position: 'top',
+                        horizontal: true,
+                        //start: -45,//deg
+                        animation: "into",
+                        menus: menuIndex,
+
+                    });
+
+    setTimeout(function () {
+        cmenu
+                .show();
+    }, 50);
+
+
+  
+
+  </script>
